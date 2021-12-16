@@ -3,7 +3,7 @@ import uuid
 
 # Create your models here.
 
-class Coops(models.Model):
+class Coop(models.Model):
     id = models.AutoField(primary_key=True)
 
     name = models.CharField(max_length=100, help_text='What is the name of this coop')
@@ -25,12 +25,12 @@ class Coops(models.Model):
         return self.name
 
 
-class Officers(models.Model):
+class Officer(models.Model):
     id = models.AutoField(primary_key=True)
 
-    coop = models.ForeignKey('Coops', on_delete=models.SET_NULL, null=True)
+    coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
 
-    member = models.ForeignKey('Members', on_delete=models.SET_NULL, null=True)
+    member = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
 
     position_name = models.CharField(max_length=100)
 
@@ -48,7 +48,7 @@ class Officers(models.Model):
 
 
 
-class Members(models.Model):
+class Member(models.Model):
     id = models.AutoField(primary_key=True)
 
     first_name = models.CharField(max_length=30)
@@ -59,7 +59,7 @@ class Members(models.Model):
 
     tnumber = models.IntegerField()
 
-    coop = models.ForeignKey('Coops', on_delete=models.SET_NULL, null=True)
+    coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
 
     email = models.EmailField()
 
@@ -74,7 +74,7 @@ class Members(models.Model):
         return self.preferred_name
 
 
-class Workchart_slots(models.Model):
+class Workchart_slot(models.Model):
     id = models.AutoField(primary_key=True)
 
     day_of_week = models.CharField(max_length=10)
@@ -99,16 +99,16 @@ class AllergySeverity(models.IntegerChoices):
     MED_HIGH= 3, ('Medium-High')
     HIGH = 4, ('High')
 
-class Allergies(models.Model):
+class Allergy(models.Model):
     id = models.AutoField(primary_key=True)
 
     name = models.CharField(max_length=50)
 
     severity = models.IntegerField(default=AllergySeverity.LOW, choices=AllergySeverity.choices)
 
-    member = models.ForeignKey('Members', on_delete=models.SET_NULL, null=True)
+    member = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
 
-    coop = models.ForeignKey('Coops', on_delete=models.SET_NULL, null=True)
+    coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
 
     allowed_in_coop = models.BooleanField()
     
@@ -121,7 +121,7 @@ class Allergies(models.Model):
 class Budget(models.Model):
     id = models.AutoField(primary_key=True)
 
-    coop = models.ForeignKey('Coops', on_delete=models.SET_NULL, null=True)
+    coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
 
     total_budget = models.IntegerField()
 
