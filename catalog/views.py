@@ -26,9 +26,9 @@ def index1(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
 
-def index(request): #Right now returns all members of Pyle because index is set to it
+def index(request): 
     """
-    View function to show every member in the Member's Database/ Show's members in every Coop
+    View function to show every office in Pyle
     """
 
     officers_pyle= Officer.objects.select_related("coop").filter(coop_id__exact=2)
