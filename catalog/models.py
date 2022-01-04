@@ -55,19 +55,19 @@ class Member(models.Model):
 
     last_name = models.CharField(max_length=50)
 
-    preferred_name = models.CharField(max_length=100)
+    preferred_name = models.CharField(max_length=100, null=True, blank = True)
 
     tnumber = models.IntegerField()
 
     coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
 
-    email = models.EmailField()
+    email = models.EmailField(null = True, blank = True)
 
     pronouns = models.CharField(max_length=20)
 
     time_aid = models.IntegerField()
 
-    missed_jobes = models.IntegerField()
+    missed_jobes = models.IntegerField(null = True, blank = True)
 
     def __str__(self):
         """String for representing the Model object."""
