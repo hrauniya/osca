@@ -15,16 +15,19 @@ keep = Coop(name = "Keep", building = "Keep Cottage", vegan = False, num_dining 
 tank = Coop(name = "Tank", building = "Tank House", vegan = False, num_dining = 60, num_housing = 40, hours_needed = 6)
 pyle = Coop(name = "Pyle", building = "Asia House", vegan = False, num_dining = 0, num_housing = 70, hours_needed = 5)
 harkness = Coop(name = "Harkness", building = "Harkness Hall", vegan = False, num_dining = 70, num_housing = 50, hours_needed = 4)
+third_world = Coop(name = "Third World House", building = "Price Hall", vegan = False, num_dining = 30, num_housing = 20, hours_needed = 6)
+
 
 keep.save()
 tank.save()
 pyle.save()
 harkness.save()
+third_world.save()
 
 tNumber = 0000000
 for member in memberNames:
     firstname, lastname = member.split()
-    coop = random.choice([keep, tank, pyle, harkness])
+    coop = random.choice([keep, tank, pyle, harkness, third_world])
     pronouns = random.choice(["she/her/hers", "he/him/his", "they/them/theirs"])
     timeAid = random.choice([0,1,2,3])
     newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
