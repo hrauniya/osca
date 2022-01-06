@@ -24,9 +24,9 @@ harkness.save()
 tNumber = 0000000
 for member in memberNames:
     firstname, lastname = member.split()
-    coop = random.choice(keep, tank, pyle, harkness)
-    pronouns = random.choice("she/her/hers", "he/him/his", "they/them/theirs")
-    timeAid = random.choice(0,1,2,3)
+    coop = random.choice([keep, tank, pyle, harkness])
+    pronouns = random.choice(["she/her/hers", "he/him/his", "they/them/theirs"])
+    timeAid = random.choice([0,1,2,3])
     newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
     newMember.save()
 

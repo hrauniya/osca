@@ -71,7 +71,8 @@ class Member(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return self.preferred_name
+        returnString = self.first_name + " " + self.last_name + " " + str(self.coop)
+        return returnString
 
 
 class Workchart_slot(models.Model):
