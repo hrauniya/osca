@@ -34,13 +34,13 @@ class Officer(models.Model):
 
     position_name = models.CharField(max_length=100)
 
-    position_description = models.CharField(max_length=500)
+    position_description = models.CharField(max_length=500, null=True, blank=True)
 
     hours_required = models.IntegerField()
 
-    emergency_contact = models.BooleanField()
+    emergency_contact = models.BooleanField(default=False)
 
-    all_osca = models.BooleanField()
+    all_osca = models.BooleanField(default=False)
 
     def __str__(self):
         """String for representing the Model object."""

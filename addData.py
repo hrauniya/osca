@@ -1,6 +1,6 @@
 import os
 import django
-import random
+from numpy.random import choice
 
 from osca.wsgi import *
 from catalog.models import Coop, Member, Officer, Workchart_slot, AllergySeverity, Allergy, Budget
@@ -27,11 +27,32 @@ third_world.save()
 tNumber = 0000000
 for member in memberNames:
     firstname, lastname = member.split()
-    coop = random.choice([keep, tank, pyle, harkness, third_world])
-    pronouns = random.choice(["she/her/hers", "he/him/his", "they/them/theirs"])
-    timeAid = random.choice([0,1,2,3])
+    coop = choice([keep, tank, pyle, harkness, third_world], p=(.15, .15, .25, .35, .1))
+    pronouns = choice(["she/her/hers", "he/him/his", "they/them/theirs"])
+    timeAid = choice([0,1,2,3])
     newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
     newMember.save()
+
+positions = ('DLEC', 3, 'DLEC', 3 , 'Food Safety Coordinator', 'full', 'Food Safety Coordinator', 'full', 'New Member Trainer', 2 , 'KitchCo', 'full' , 'KitchCo', 'full' , 'Membership Coordinator', 3 , 'Membership Coordinator', 3 , 'Accessibility Coordinator', 3,  'Food Buyer and Unpacker', 3, 'Food Buyer and Unpacker', 3, 'Board Representitive', 3, 'Board Representitive', 3, 'Treasurer', 3,  'Pizza Maker', 3, 'Pizza Maker', 3, 'Dough Maker', 2,  'Tasty Things Maker', 3, 'Tasty Things Maker', 3, 'Tasty Things Maker', 3, 'Bread Maker', 'full', 'Bread Maker', 'full',  'Granola Maker', 2, 'Granola Maker', 2, 'Dietary Restrictions Maker', 3, 'Long Range Planning Committee Representitive', 1, 'Environmental Concerns Committee Representitive', 1, 'Programming Committee Representitve', 1, 'OSCA Foundation Representitive', 1, 'Historian', 1)
+for coop in  [keep, tank, pyle, harkness, third_world]:
+    coop_members = Member.objects.filter(coop = coop)
+    i = 0
+    num_positions = len(positions)
+    for member in coop_members:
+        if i == num_positions:
+            break
+        position = positions[i]
+        hours = positions[i+1]
+        if hours == 'full':
+            hours = coop.hours_needed
+        emergencyContact = False
+        if position == 'DLEC' or position == 'Food Safety Coordinator' or position == 'KitchCo':
+            emergencyContact = True
+        newOfficer = Officer(coop = coop, member = member, position_name = positions[i], hours_required = hours, emergency_contact = emergencyContact)
+        i += 2
+        newOfficer.save()
+        
+
 
 #officer positions:
 #iDLEC, DLEC, Food Safety Coordinator, New Member Trainer, KitchCo, Membership Coordinator, DLEC, Accessibility Coordinator, Food Buyer and Unpacker, Board Representitive, Treasurer, Head Cook, Pizza Maker, Dough Maker, Tasty Things Maker, Bread Maker, Granola Maker, Dietary Restrictions Maker, Long Range Planning Committee Representitive, Environmental Concerns Committee Representitive, Programming COmmittee Representitve, OSCA Foundation Representitive, Historian, Cheese Slicer, 
