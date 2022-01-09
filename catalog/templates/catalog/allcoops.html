@@ -1,14 +1,6 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Osca Home</h1>
-  <p>Welcome to Osca Database, a website developed by <em>Harsha, Noah, and Henry </em>!</p>
-  <h2>Dynamic content</h2>
-  <p>The database has the following record counts:</p>
-  <ul>
-    <li><strong>Coops:</strong> {{ num_coops }}</li>
-    <li><strong>Members:</strong> {{ num_members }}</li>
-  </ul>
 
 
 
@@ -25,7 +17,7 @@
             <td>Hours Needed</td>
         </tr>
 
-        {% for coops in allcoops %}
+        {% for coops in object_list %}
         <tr>
             <td>{{ coops.id }}</td>
             <td>{{ coops.name}}</td>
@@ -33,13 +25,31 @@
             <td>{{ coops.building}}</td>
             <td>{{ coops.vegan}}</td>
             <td>{{ coops.num_dining}}</td>
-            <td>{{ num_housing}}</td>
-            <td>{{ hours_needed}}</td>
+            <td>{{ coops.num_housing}}</td>
+            <td>{{ coops.hours_needed}}</td>
 
             
         </tr>
         {% endfor %}
     </table>
+
+    <div class="pagination" style ="width: 50%; margin: 0 auto;">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"> next </a>
+                <a href="?page={{ page_obj.paginator.num_pages }}"> last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
 
 <!-- <html>

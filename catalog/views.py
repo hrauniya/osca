@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views import generic
+
 
 # Create your views here.
 
@@ -36,25 +38,30 @@ def index(request):
 
     context={
         'officers_pyle': officers_pyle
-        
+
     }
 
     return render(request,'index.html',context=context)
 
-def allmembers(request):
-    """
-    Displays all members in all Coops 
+class AllMembersView(generic.ListView):
+    model = Member
+    paginate_by = 30
+    template_name = 'catalog/allmembers.html'  # Specify your own template name/location
 
-    """
+# def allmembers(request):
+#     """
+#     Displays all members in all Coops 
 
-    allmember= Member.objects.all()
-    num_members=Member.objects.all().count()
+#     """
 
-    context={
-        'allmember':allmember
-    }
+#     allmember= Member.objects.all()
+#     num_members=Member.objects.all().count()
 
-    return render(request,'allmembers.html',context=context)
+#     context={
+#         'allmember':allmember
+#     }
+
+#     return render(request,'catalog/allmembers.html',context=context)
 
 def memberspyle(request): 
     """
@@ -121,6 +128,11 @@ def memberskeep(request):
 
     return render(request,'memberskeep.html',context=context)
 
+
+class AllOfficersView(generic.ListView):
+    model = Officer
+    paginate_by = 30
+    template_name = 'catalog/allofficers.html'  # Specify your own template name/location
 
 def all_officers(request):
     """
@@ -210,22 +222,27 @@ def thirdworldofficers(request):
 
     return render(request,'tankofficers.html',context=context)
 
-def all_coops(request):
+class AllCoopView(generic.ListView):
+    model = Coop
+    paginate_by = 30
+    template_name = 'catalog/allcoops.html'  # Specify your own template name/location
+
+# def all_coops(request):
     
     
-    """
-    View fucntion to show a list of every coop in the Coop database
-    """   
+#     """
+#     View fucntion to show a list of every coop in the Coop database
+#     """   
 
-    allcoops=Coop.objects.all()
-    num_coop=Coop.objects.all().count()
+#     allcoops=Coop.objects.all()
+#     num_coop=Coop.objects.all().count()
 
-    context={
-        'allcoops':allcoops,
-        'num_coop':num_coop,
-    } 
+#     context={
+#         'allcoops':allcoops,
+#         'num_coop':num_coop,
+#     } 
 
-    return render(request,'allcoops.html',context=context)
+#     return render(request,'allcoops.html',context=context)
 
 def allallergies(request):
 
