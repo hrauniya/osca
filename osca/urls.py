@@ -32,11 +32,11 @@ urlpatterns += [
 
 
 # Use static() to add url mapping to serve static files during development (only)
-from django.conf import settings
-from django.conf.urls.static import static
+#from django.conf import settings
+#from django.conf.urls.static import static
 
 
-urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 #Add URL maps to redirect the base URL to our application
