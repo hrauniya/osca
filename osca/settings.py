@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'catalog/templates/static'),
 )
 
 
