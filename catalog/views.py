@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -43,7 +44,8 @@ def index(request):
 
     return render(request,'index.html',context=context)
 
-class AllMembersView(generic.ListView):
+
+class AllMembersView(LoginRequiredMixin, generic.ListView):
     model = Member
     paginate_by = 30
     template_name = 'catalog/allmembers.html'  # Specify your own template name/location

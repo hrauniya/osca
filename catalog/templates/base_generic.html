@@ -8,6 +8,8 @@
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
 </head>
 <body>
   <div class="container-fluid">
@@ -19,6 +21,12 @@
           <li><a href="{% url 'all-coops' %}">All Coop</a></li>
           <li><a href="{% url 'all-officers' %}">All Officers</a></li>
           <li><a href="{% url 'all-members' %}">All Members</a></li>
+          {% if user.is_authenticated %}
+          <li>User: {{ user.get_username }}</li>
+          <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+          {% endif %}
         </ul>
      {% endblock %}
       </div>
