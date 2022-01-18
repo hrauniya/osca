@@ -1,6 +1,14 @@
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+import datetime
+
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.messages.views import SuccessMessageMixin
+
+from catalog.forms import addMemberInfo
 
 
 # Create your views here.
@@ -407,4 +415,36 @@ def thirdworldbudget(request):
     }
 
     return render(request,'thirdworldbudget.html', context=context)
-              
+
+
+# Form Views -------------------->
+
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
+from catalog.models import Member
+
+class MemberCreate(CreateView,SuccessMessageMixin):
+    model = Member
+    fields = ['id','first_name','last_name','preferred_name','tnumber','coop','email','pronouns','time_aid','missed_jobes']
+    success_url = reverse_lazy('all-members')
+
+class MemberUpdate(UpdateView):
+    model = Member
+    fields = ['id','first_name','last_name','preferred_name','tnumber','coop','email','pronouns','time_aid','missed_jobes']
+    success_url = reverse_lazy('all-members')
+
+class MemberDelete(DeleteView):
+    model = Member
+    success_url = reverse_lazy('authors')
+
+class OfficersCreate(CreateView):
+    model=Officer
+    fields = ['id','coop','member','position_name','position_description','hours_required','emergency_contact','all_osca']
+    success_url=reverse_lazy('all-officers')
+
+  
+class OfficersUpdate(UpdateView):
+    model=Officer
+    fields = ['id','coop','member','position_name','position_description','hours_required','emergency_contact','all_osca']
+    success_url=reverse_lazy('all-officers')

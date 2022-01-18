@@ -6,4 +6,6 @@ urlpatterns = [
     path('allcoops/', views.AllCoopView.as_view(), name='all-coops'),
     path('allmembers/', views.AllMembersView.as_view(), name='all-members'),
     path('allofficers/', views.AllOfficersView.as_view(), name='all-officers'),
+    path('addmemberinfo/',views.MemberCreate.as_view(),name='member-create'),
+    path('addofficerinfo/',views.OfficersCreate.as_view(),name='officer-create'),
 ]
