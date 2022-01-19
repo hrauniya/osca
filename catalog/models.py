@@ -1,4 +1,6 @@
+from calendar import FRIDAY, MONDAY, SATURDAY, SUNDAY, THURSDAY, TUESDAY, WEDNESDAY
 from django.db import models
+from django import forms
 import uuid
 
 # Create your models here.
@@ -71,26 +73,87 @@ class Member(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        returnString = self.first_name + " " + self.last_name + " " + str(self.coop)
+        returnString = self.first_name + " " + self.last_name
         return returnString
 
+
+
+class Menu(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    headCook = models.ForeignKey('Member', on_delete=models.SET_NULL, null = True)
+
+    protein = models.CharField(max_length=300)
+
+    vegetable = models.CharField(max_length=300)
+
+    starch = models.CharField(max_length=300)
+
+    dr_protein = models.CharField(max_length=300, null=True, blank = True)
+
+    dr_vegetable = models.CharField(max_length=300, null=True, blank = True)
+
+    dr_starch = models.CharField(max_length=300, null=True, blank = True)
+
+    meat = models.BooleanField(null = True, default = False)
+
+    comments = models.CharField(max_length=500, null=True, blank = True)
+
+
+class Meal(models.Model):
+    class Meal_Choices(models.IntegerChoices):
+        BREAKFAST = 1, ("Breakfast")
+        LUNCH = 2, ("Lunch")
+        DINNER = 3, ("Dinner")
+        PIZZA_NIGHT = 4, ("Pizza Night")
+        SPECIAL_MEAL = 5, ("Specail Meal")
+        COMMANDO_CREW = 6, ("Commando Crew")
+
+    class Day_Choices(models.IntegerChoices):
+        SUNDAY = 1, ("Sunday")
+        MONDAY = 2, ("Monday")
+        TUESDAY = 3, ("Tuesday")
+        WEDNESDAY = 4, ("Wednesday")
+        THURSDAY = 5, ("Thursday")
+        FRIDAY = 6, ("Friday")
+        SATURDAY = 7, ("Saturday")
+
+    id = models.AutoField(primary_key=True)
+
+    coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
+
+    menu = models.ForeignKey('Menu', on_delete=models.SET_NULL, null=True, blank=True)
+
+    meal_of_the_day = models.IntegerField('Meal_Choices', choices = Meal_Choices.choices, default=2)
+
+    day_of_week = models.IntegerField('Day_Choices', choices=Day_Choices.choices, default=1)
+
+    crew_required_members = models.IntegerField()
+
+    cook_required_members = models.IntegerField()
 
 class Workchart_slot(models.Model):
     id = models.AutoField(primary_key=True)
 
-    day_of_week = models.CharField(max_length=10)
+    coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
 
-    meal = models.CharField(max_length=20)
+    meal = models.ForeignKey('Meal', on_delete=models.SET_NULL, null=True)
+
+    member = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
 
     crew = models.BooleanField()
 
-    required_members = models.IntegerField()
+    start_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+    end_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
     pic = models.BooleanField()
 
+
+
     def __str__(self):
         """String for representing the Model object."""
-        return self.meal
+        return str(self.start_time)
 
 
 class AllergySeverity(models.IntegerChoices):
