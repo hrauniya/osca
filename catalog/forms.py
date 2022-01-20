@@ -2,7 +2,7 @@ from django.forms import ModelForm
 
 
 from catalog.models import Member 
-from catalog.models import Workchart_slot
+#from catalog.models import Workchart_slot
 from catalog.models import Allergy
 from catalog.models import Budget
 from catalog.models import Officer
