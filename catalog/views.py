@@ -13,7 +13,7 @@ from catalog.forms import addMemberInfo
 
 # Create your views here.
 
-from .models import CookShift, Coop, Member, Officer, Allergy, AllergySeverity, Budget, Meal, Menu, CrewShift
+from .models import Coop, Member, Officer, Allergy, AllergySeverity, Budget, Meal, Menu, Shift, WorkChartRow
 
 def index1(request):
     """View function for home page of site."""
@@ -450,28 +450,43 @@ class OfficersUpdate(UpdateView):
     success_url=reverse_lazy('all-officers')
 
 
-class MealsKeep(generic.ListView):
-    model=Meal
-    template_name = 'catalog/workchart.html'  # Specify your own template name/location
-    # context_object_name = 'meals-list'
+class WorkChartKeep(generic.ListView):
+    model=WorkChartRow
+    template_name = 'catalog/keepworkchart.html'  # Specify your own template name/location
 
     def get_queryset(self):
         keep = Coop.objects.get(name = "Keep")
-        return Meal.objects.filter(coop=keep)
+        return WorkChartRow.objects.filter(coop=keep)
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
-        context = super().get_context_data(**kwargs)
-        # Create any data and add it to the context
-        # keep = Coop.objects.get(name = "Keep")
-        # meals = Meal.objects.filter(coop=keep)
-        cookShifts = CookShift.objects.all()
-        crewShifts = CrewShift.objects.all()
-        context['cook_shifts'] = cookShifts
-        context['crew_shifts'] = crewShifts
-        meals = [1,2,3]
-        context['meals'] = meals
-        days = [1,2,3,4,5,6,7]
-        context['days'] = days
-        return context
-    
+class WorkChartPyle(generic.ListView):
+    model=WorkChartRow
+    template_name = 'catalog/pyleworkchart.html'  # Specify your own template name/location
+
+    def get_queryset(self):
+        keep = Coop.objects.get(name = "Keep")
+        return WorkChartRow.objects.filter(coop=keep)
+
+class WorkChartKeep(generic.ListView):
+    model=WorkChartRow
+    template_name = 'catalog/keepworkchart.html'  # Specify your own template name/location
+
+    def get_queryset(self):
+        keep = Coop.objects.get(name = "Keep")
+        return WorkChartRow.objects.filter(coop=keep)
+
+class WorkChartKeep(generic.ListView):
+    model=WorkChartRow
+    template_name = 'catalog/keepworkchart.html'  # Specify your own template name/location
+
+    def get_queryset(self):
+        keep = Coop.objects.get(name = "Keep")
+        return WorkChartRow.objects.filter(coop=keep)
+
+class WorkChartKeep(generic.ListView):
+    model=WorkChartRow
+    template_name = 'catalog/keepworkchart.html'  # Specify your own template name/location
+
+    def get_queryset(self):
+        keep = Coop.objects.get(name = "Keep")
+        return WorkChartRow.objects.filter(coop=keep)
+

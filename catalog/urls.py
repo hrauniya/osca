@@ -8,4 +8,5 @@ urlpatterns = [
     path('allofficers/', views.AllOfficersView.as_view(), name='all-officers'),
     path('addmemberinfo/',views.MemberCreate.as_view(),name='member-create'),
     path('addofficerinfo/',views.OfficersCreate.as_view(),name='officer-create'),
+    path('keepworkchart/', views.WorkChartKeep.as_view(),name='keep-work-chart'),
 ]

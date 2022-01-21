@@ -71,6 +71,8 @@ class Member(models.Model):
 
     missed_jobes = models.IntegerField(null = True, blank = True)
 
+
+
     def __str__(self):
         """String for representing the Model object."""
         returnString = self.first_name + " " + self.last_name
@@ -123,61 +125,53 @@ class Meal(models.Model):
 
     menu = models.ForeignKey('Menu', on_delete=models.SET_NULL, null=True, blank=True)
 
-    crew = models.ForeignKey('Crew', on_delete=models.SET_NULL, null=True, blank=True)
-
-    cook = models.ForeignKey('Cook', on_delete=models.SET_NULL, null=True, blank=True)
-
     meal_of_the_day = models.IntegerField('Meal_Choices', choices = Meal_Choices.choices, default=2)
 
     day_of_week = models.IntegerField('Day_Choices', choices=Day_Choices.choices, default=1)
 
-class Crew(models.Model):
-    id = models.AutoField(primary_key=True)
-
-    start_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
-
-    end_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
-
-    pic = models.ForeignKey('CrewShift', on_delete=models.SET_NULL, null=True)
-
-class Cook(models.Model):
-    id = models.AutoField(primary_key=True)
-
-    start_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
-
-    mid_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
-
-    end_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
-
-    head_cook = models.ForeignKey('CookShift', on_delete=models.SET_NULL, null=True)
-
-class CookShift(models.Model):
-
-    class Shift_Times(models.IntegerChoices):
-        FULL = 1, ("Full cook shift")
-        FIRST = 2, ("First half of cook shift")
-        SECOND = 3, ("Second half of cook shift")
+    
+class Shift(models.Model):
 
     id = models.AutoField(primary_key=True)
 
-    cook_obj = models.ForeignKey('Cook', on_delete=models.SET_NULL, null=True)
-
-    shift_selection = models.IntegerField('Shift_Times', choices = Shift_Times.choices, default=1)
-
-    member = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
-
-    is_head_cook = models.BooleanField()
-
-
-class CrewShift(models.Model):
-
-    id = models.AutoField(primary_key=True)
-
-    crew_obj = models.ForeignKey('Crew', on_delete=models.SET_NULL, null=True)
+    cook = models.BooleanField()
 
     member = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
 
     is_pic = models.BooleanField()
+
+    meal = models.ForeignKey('Meal', on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return str(self.member)
+
+
+class WorkChartRow(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
+
+    time = models.CharField(max_length=20, null=True, blank = True)
+
+    cook = models.BooleanField()
+
+    pic = models.BooleanField()
+
+    monday = models.ForeignKey('Shift', on_delete=models.SET_NULL, null=True, related_name='monday')
+    
+    tuesday = models.ForeignKey('Shift', on_delete=models.SET_NULL, null=True, related_name='tuesday')
+
+    wednesday = models.ForeignKey('Shift', on_delete=models.SET_NULL, null=True, related_name='wednesday')
+
+    thursday = models.ForeignKey('Shift', on_delete=models.SET_NULL, null=True, related_name='thursday')
+
+    friday = models.ForeignKey('Shift', on_delete=models.SET_NULL, null=True, related_name='friday')
+
+    saturday = models.ForeignKey('Shift', on_delete=models.SET_NULL, null=True, related_name='saturday')
+
+    sunday = models.ForeignKey('Shift', on_delete=models.SET_NULL, null=True, related_name='sunday')
+
 
 
 
