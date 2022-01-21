@@ -27,6 +27,11 @@
           {% else %}
           <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
           {% endif %}
+          <li><a href="{% url 'member-create' %}">Add Members</a></a></li>
+          
+
+          <li><a href="{% url 'officer-create' %}">Add Officers</a></a></li>
+
         </ul>
      {% endblock %}
       </div>

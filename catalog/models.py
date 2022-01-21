@@ -1,4 +1,6 @@
+#from calendar import FRIDAY, MONDAY, SATURDAY, SUNDAY, THURSDAY, TUESDAY, WEDNESDAY
 from django.db import models
+from django import forms
 import uuid
 
 # Create your models here.
@@ -71,26 +73,136 @@ class Member(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        returnString = self.first_name + " " + self.last_name + " " + str(self.coop)
+        returnString = self.first_name + " " + self.last_name
         return returnString
 
 
-class Workchart_slot(models.Model):
+
+class Menu(models.Model):
     id = models.AutoField(primary_key=True)
 
-    day_of_week = models.CharField(max_length=10)
+    headCook = models.ForeignKey('Member', on_delete=models.SET_NULL, null = True)
 
-    meal = models.CharField(max_length=20)
+    protein = models.CharField(max_length=300)
 
-    crew = models.BooleanField()
+    vegetable = models.CharField(max_length=300)
 
-    required_members = models.IntegerField()
+    starch = models.CharField(max_length=300)
 
-    pic = models.BooleanField()
+    dr_protein = models.CharField(max_length=300, null=True, blank = True)
 
-    def __str__(self):
-        """String for representing the Model object."""
-        return self.meal
+    dr_vegetable = models.CharField(max_length=300, null=True, blank = True)
+
+    dr_starch = models.CharField(max_length=300, null=True, blank = True)
+
+    meat = models.BooleanField(null = True, default = False)
+
+    comments = models.CharField(max_length=500, null=True, blank = True)
+
+class Meal(models.Model):
+    class Meal_Choices(models.IntegerChoices):
+        BREAKFAST = 1, ("Breakfast")
+        LUNCH = 2, ("Lunch")
+        DINNER = 3, ("Dinner")
+        PIZZA_NIGHT = 4, ("Pizza Night")
+        SPECIAL_MEAL = 5, ("Specail Meal")
+        COMMANDO_CREW = 6, ("Commando Crew")
+
+    class Day_Choices(models.IntegerChoices):
+        MONDAY = 1, ("Monday")
+        TUESDAY = 2, ("Tuesday")
+        WEDNESDAY = 3, ("Wednesday")
+        THURSDAY = 4, ("Thursday")
+        FRIDAY = 5, ("Friday")
+        SATURDAY = 6, ("Saturday")
+        SUNDAY = 7, ("Sunday")
+
+    id = models.AutoField(primary_key=True)
+
+    coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
+
+    menu = models.ForeignKey('Menu', on_delete=models.SET_NULL, null=True, blank=True)
+
+    crew = models.ForeignKey('Crew', on_delete=models.SET_NULL, null=True, blank=True)
+
+    cook = models.ForeignKey('Cook', on_delete=models.SET_NULL, null=True, blank=True)
+
+    meal_of_the_day = models.IntegerField('Meal_Choices', choices = Meal_Choices.choices, default=2)
+
+    day_of_week = models.IntegerField('Day_Choices', choices=Day_Choices.choices, default=1)
+
+class Crew(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    start_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+    end_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+    pic = models.ForeignKey('CrewShift', on_delete=models.SET_NULL, null=True)
+
+class Cook(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    start_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+    mid_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+    end_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+    head_cook = models.ForeignKey('CookShift', on_delete=models.SET_NULL, null=True)
+
+class CookShift(models.Model):
+
+    class Shift_Times(models.IntegerChoices):
+        FULL = 1, ("Full cook shift")
+        FIRST = 2, ("First half of cook shift")
+        SECOND = 3, ("Second half of cook shift")
+
+    id = models.AutoField(primary_key=True)
+
+    cook_obj = models.ForeignKey('Cook', on_delete=models.SET_NULL, null=True)
+
+    shift_selection = models.IntegerField('Shift_Times', choices = Shift_Times.choices, default=1)
+
+    member = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
+
+    is_head_cook = models.BooleanField()
+
+
+class CrewShift(models.Model):
+
+    id = models.AutoField(primary_key=True)
+
+    crew_obj = models.ForeignKey('Crew', on_delete=models.SET_NULL, null=True)
+
+    member = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
+
+    is_pic = models.BooleanField()
+
+
+
+# class Workchart_slot(models.Model):
+#     id = models.AutoField(primary_key=True)
+
+#     coop = models.ForeignKey('Coop', on_delete=models.SET_NULL, null=True)
+
+#     meal = models.ForeignKey('Meal', on_delete=models.SET_NULL, null=True)
+
+#     member = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
+
+#     crew = models.BooleanField()
+
+#     start_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+#     end_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+
+#     pic = models.BooleanField()
+
+
+
+#     def __str__(self):
+#         """String for representing the Model object."""
+#         return str(self.start_time)
 
 
 class AllergySeverity(models.IntegerChoices):
