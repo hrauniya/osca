@@ -463,30 +463,30 @@ class WorkChartPyle(generic.ListView):
     template_name = 'catalog/pyleworkchart.html'  # Specify your own template name/location
 
     def get_queryset(self):
-        keep = Coop.objects.get(name = "Keep")
-        return WorkChartRow.objects.filter(coop=keep)
+        pyle = Coop.objects.get(name = "Pyle")
+        return WorkChartRow.objects.filter(coop=pyle)
 
-class WorkChartKeep(generic.ListView):
+class WorkChartTank(generic.ListView):
     model=WorkChartRow
-    template_name = 'catalog/keepworkchart.html'  # Specify your own template name/location
+    template_name = 'catalog/tankworkchart.html'  # Specify your own template name/location
 
     def get_queryset(self):
-        keep = Coop.objects.get(name = "Keep")
-        return WorkChartRow.objects.filter(coop=keep)
+        tank = Coop.objects.get(name = "Tank")
+        return WorkChartRow.objects.filter(coop=tank)
 
-class WorkChartKeep(generic.ListView):
+class WorkChartHarkness(generic.ListView):
     model=WorkChartRow
-    template_name = 'catalog/keepworkchart.html'  # Specify your own template name/location
+    template_name = 'catalog/harknessworkchart.html'  # Specify your own template name/location
 
     def get_queryset(self):
-        keep = Coop.objects.get(name = "Keep")
-        return WorkChartRow.objects.filter(coop=keep)
+        harkness = Coop.objects.get(name = "Harkness")
+        return WorkChartRow.objects.filter(coop=harkness)
 
-class WorkChartKeep(generic.ListView):
+class WorkChartThirdWorld(generic.ListView):
     model=WorkChartRow
-    template_name = 'catalog/keepworkchart.html'  # Specify your own template name/location
+    template_name = 'catalog/thirdworldcoopworkchart.html'  # Specify your own template name/location
 
     def get_queryset(self):
-        keep = Coop.objects.get(name = "Keep")
-        return WorkChartRow.objects.filter(coop=keep)
+        thirdWorld = Coop.objects.get(name = "Third World House")
+        return WorkChartRow.objects.filter(coop=thirdWorld)
 
