@@ -8,6 +8,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 
+
+
+from django.template import RequestContext
+
 from catalog.forms import addMemberInfo
 
 
@@ -56,7 +60,9 @@ def index(request):
 class AllMembersView(LoginRequiredMixin, generic.ListView):
     model = Member
     paginate_by = 30
+    num_members= Member.objects.all().count()
     template_name = 'catalog/allmembers.html'  # Specify your own template name/location
+
 
 # def allmembers(request):
 #     """
@@ -144,6 +150,8 @@ class AllOfficersView(generic.ListView):
     model = Officer
     paginate_by = 30
     template_name = 'catalog/allofficers.html'  # Specify your own template name/location
+    
+
 
 def all_officers(request):
     """
@@ -237,6 +245,9 @@ class AllCoopView(generic.ListView):
     model = Coop
     paginate_by = 30
     template_name = 'catalog/allcoops.html'  # Specify your own template name/location
+
+
+    
 
 # def all_coops(request):
     

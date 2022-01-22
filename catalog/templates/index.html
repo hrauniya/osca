@@ -1,25 +1,35 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Osca Home</h1>
-  <p>Welcome to Osca Database, a website developed by <em>Harsha, Noah, and Henry </em>!</p>
-  {% load static %}
-  <img src="{% static 'images/twinpines.png' %}" alt="Our Logo" style="width:555px;height:540px;">
-  <h2>Dynamic content</h2>
+<div class=" row">
+  <div class="three columns">
+    {% load static %}  
+    <img src="{% static 'images/twinpines.png' %}" width="170" height="170" alt="Our Logo">
+  </div>
+  <div class="eight columns" style="margin-top:2%">
+    <h1><a>OSCA Home</a></h1>
+  </div>
+</div>
+  
+<div class ="row">
+  <div class="six columns">
+    <p><center>Welcome to Osca Database, a website developed by <em>Harsha, Noah, and Henry </em>!</center></p>
+
+  </div>
+
+
+</div>
   <p>The database has the following record counts:</p>
   <ul>
     <li><strong>Coops:</strong> {{ num_coops }}</li>
     <li><strong>Members:</strong> {{ num_members }}</li>
-  </ul>
-
-  <h1>Total number of Officers</h1>
-  <p>The database has the following number of officers:</p>
-  <ul>
     <li><strong>Officers:</strong>{{num_officers}}</li>
   </ul>
+  
+   
 
 
-  <h1>List of all Officers in OSCA</h1>
+  <!-- <h1>List of all Officers in OSCA</h1>
     <table border="1" width="1000">
         <tr>
           <td>ID</td>
@@ -46,51 +56,6 @@
             
         </tr>
         {% endfor %}
-    </table>
+    </table> -->
 {% endblock %}
 
-<!-- <html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Members</title>
-</head>
-
-<body>
-
-    <h1>List of Members</h1>
-    <table border="1" width="600">
-        <tr>
-            <td>ID</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Preferred Name</td>
-            <td>T Number</td>
-            <td>Coop</td>
-            <td>Email</td>
-            <td>Pronouns</td>
-            <td>Time Aid</td>
-            <td>Missed Jobs</td>
-        </tr>
-
-        {% for members in allmember %}
-        <tr>
-            <td>{{ members.id }}</td>
-            <td>{{ members.first_name }}</td>
-            <td>{{ members.last_name }}</td>
-            <td>{{ members.preferred_name }}</td>
-            <td>{{ members.tnumber}}</td>
-            <td>{{ members.coop}}</td>
-            <td>{{ members.email}}</td>
-            <td>{{ members.pronouns }}</td>
-            <td>{{ members.time_aid }}</td>
-            <td>{{ members.missed_jobes}}</td>
-            
-        </tr>
-        {% endfor %}
-    </table>
-
-
-</body>
-
-</html> -->
