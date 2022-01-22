@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<style>
+
+    .selectmenu{
+      display:grid; 
+      justify-content: center;
+      align-items:center;
+
+
+    }
+
+ 
+
+
+
+  </style>
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="row">
+    <div class="two columns">
+      {% load static %}  
+      <img src="{% static 'images/twinpines.png' %}" width="128" height="128" alt="Our Logo">
+    </div>
+    <div class="five columns" style="margin-top:2%">
+      <h4>OSCA Membership Database</h4>
+    </div>
+  </div>
+  
+  <div class="container" style="margin-top:5%;margin-left:5%">
+    <h1> <center>Pyle Menu</center></h1>
+
+</div>
+
+<div class="selectmenu" style="margin-right:10%">
+<h1> What do you want to do?</h1>
+
+    <h4><center>Select an option!</center></h4>
+    <button onclick="window.location.href='{% url ';pyle-members;'%}'">Show Pyle Members</button>
+    <button onclick="window.location.href='{% url ';pyle-officers;'%}'">Show Pyle Officers</button>
+    <button onclick="window.location.href='{% url ';pyle-allergies;'%}'">Show Allergies of Pyle Members</button>
+    <button onclick="window.location.href='{% url ';pyle-budget;'%}'">Show Pyle Budget</button>
+    <button onclick="window.location.href='{% url ';pyle-workchart;'%}'">Pyle Workchart</button>
+
+
+    
+    
+    
+
+
+
+
+
+
+
+</div> 
+
+
+
+{% endblock %}

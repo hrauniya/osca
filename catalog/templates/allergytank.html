@@ -2,39 +2,35 @@
 
 {% block content %}
 <div class="row">
-  <div class="two columns">
-    {% load static %}  
-    <img src="{% static 'images/twinpines.png' %}" width="128" height="128" alt="Our Logo">
+    <div class="two columns">
+      {% load static %}  
+      <img src="{% static 'images/twinpines.png' %}" width="128" height="128" alt="Our Logo">
+    </div>
+    <div class="five columns" style="margin-top:2%">
+      <h4>OSCA Membership Database</h4>
+    </div>
   </div>
-  <div class="five columns" style="margin-top:2%">
-    <h4>OSCA Membership Database</h4>
-  </div>
-</div>
+  
 
 
-  <h1>List of all Officers in Third World Coop</h1>
+  <h1>List of all Allergies in Tank</h1>
     <table border="1" width="1000">
         <tr>
           <td>ID</td>
-          <td>Coop</td>
+          <td>Name</td>
+          <td>Severity</td>
           <td>Member</td>
-          <td>Position Name</td>
-          <td>Position Description</td>
-          <td>Hours Required</td>
-          <td>Emergency Contact</td>
-          <td>All Osca</td>
+          <td>Coop</td>
+          <td>Allowed in Coop?</td>
         </tr>
 
-        {% for officers in officers_thirdworld %}
+        {% for allergy in allergytank %}
         <tr>
-          <td>{{ officers.id }}</td>
-          <td>{{ officers.coop}}</td>
-          <td>{{ officers.member}}</td>
-          <td>{{ officers.position_name}}</td>
-          <td>{{ officers.position_description}}</td>
-          <td>{{ officers.hours_required}}</td>
-          <td>{{ officers.emergency_contact}}</td>
-          <td>{{ officers.all_osca}}</td>
+          <td>{{ allergy.id }}</td>
+          <td>{{ allergy.coop}}</td>
+          <td>{{ allergy.severity}}</td>
+          <td>{{ allergy.member}</td>
+          <td>{{ allergy.coop}}</td>
 
             
         </tr>

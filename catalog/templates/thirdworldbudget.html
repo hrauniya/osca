@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="two columns">
+      {% load static %}  
+      <img src="{% static 'images/twinpines.png' %}" width="128" height="128" alt="Our Logo">
+    </div>
+    <div class="five columns" style="margin-top:2%">
+      <h4>OSCA Membership Database</h4>
+    </div>
+  </div>
+
+
+  <h1>Budget for Third World House </h1>
+    <table border="1" width="1000">
+        <tr>
+          <td>ID</td>
+          <td>Coop</td>
+          <td>Total Budget</td>
+          <td>Remaining Budget</td>
+       
+        </tr>
+
+        {% for budget in thirdworldbudget %}
+        <tr>
+          <td>{{ budget.id}}</td>
+          <td>{{ budget.coop}}</td>
+          <td>{{ budget.total_budget}}</td>
+          <td>{{ budget.remaining_budget</td>
+     
+
+            
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

@@ -1,20 +1,15 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Osca Home</h1>
-  <p>Welcome to Osca Database, a website developed by <em>Harsha, Noah, and Henry </em>!</p>
-  <h2>Dynamic content</h2>
-  <p>The database has the following record counts:</p>
-  <ul>
-    <!-- <li><strong>Coops:</strong> {{ num_coops }}</li>
-    <li><strong>Members:</strong> {{ num_members }}</li> -->
-  </ul>
-
-  <!-- <h1>Total number of Officers</h1>
-  <p>The database has the following number of officers:</p>
-  <ul>
-    <li><strong>Officers:</strong>{{num_officers}}</li>
-  </ul> -->
+<div class="row">
+  <div class="two columns">
+    {% load static %}  
+    <img src="{% static 'images/twinpines.png' %}" width="128" height="128" alt="Our Logo">
+  </div>
+  <div class="five columns" style="margin-top:2%">
+    <h4>OSCA Membership Database</h4>
+  </div>
+</div>
 
 
   <h1>List of all Officers in Tank Coop</h1>

@@ -84,6 +84,7 @@ def memberspyle(request):
         'pylemembers': pylemembers
     }
 
+
     return render(request,'memberspyle.html',context=context)
 
 def membersthirdworld(request): 
@@ -124,7 +125,7 @@ def membersharkness(request):
         'harknessmembers': harknessmembers
     }
 
-    return render(request,'membersharkenss.html',context=context)
+    return render(request,'membersharkness.html',context=context)
 
 def memberskeep(request):
 
@@ -448,6 +449,49 @@ class OfficersUpdate(UpdateView):
     model=Officer
     fields = ['id','coop','member','position_name','position_description','hours_required','emergency_contact','all_osca']
     success_url=reverse_lazy('all-officers')
+
+#Menu Views
+
+def PyleMenu(request):
+
+    context={
+        
+    }
+
+    return render(request,'catalog/pyle_menu.html', context=context)
+
+def TwcMenu(request):
+
+    context={
+        
+    }
+
+    return render(request,'catalog/twc_menu.html', context=context)
+
+def HarknessMenu(request):
+
+    context={
+        
+    }
+
+    return render(request,'catalog/harkness_menu.html', context=context)    
+
+def KeepMenu(request):
+    context={
+
+    }
+    return render(request,'catalog/keep_menu.html',context=context)
+
+def TankMenu(request):
+
+    context={
+        
+    }
+
+    return render(request,'catalog/tank_menu.html', context=context)    
+
+
+
 
 
 class WorkChartKeep(generic.ListView):
