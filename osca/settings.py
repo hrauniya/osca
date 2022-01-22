@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'catalog/templates/static'),
+    os.path.join(BASE_DIR, 'catalog/Templates/static'),
 )
 
 
@@ -79,7 +79,7 @@ ROOT_URLCONF = 'osca.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'Templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
