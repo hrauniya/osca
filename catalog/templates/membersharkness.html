@@ -11,84 +11,35 @@
     </div>
   </div>
 
+<style>
+  .columns { white-space: nowrap; overflow: hidden; text-overflow:ellipsis; margin:0 auto; padding-left:5px}
+  .title { white-space: nowrap; overflow: hidden; text-overflow:ellipsis; margin:0 auto; padding-left:5px; font-weight: bold}
+</style>
 
+<h1 style="padding-left: 7%; font-weight: bold">List of Members in Harkness Coop</h1>
+  <table border="1" width="1000">
+      <tr>
+          <!-- <td>Preferred Name</td> -->
+          <!-- <td>Email</td> -->
+          <td><div class="title">First Name</div></td>
+          <td><div class="title">Last Name</div></td>
+          <td><div class="title">Pronouns</div></td>
+          <td><div class="title">Time Aid</div></td>
+          <td><div class="title">Missed Jobs</div></td>
+      </tr>
 
-  <h1>List of Members in Harkness Coop</h1>
-    <table border="1" width="1000">
-        <tr>
-            <td>ID</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Preferred Name</td>
-            <td>T Number</td>
-            <td>Coop</td>
-            <td>Email</td>
-            <td>Pronouns</td>
-            <td>Time Aid</td>
-            <td>Missed Jobs</td>
-        </tr>
-
-        {% for members in harknessmembers %}
-        <tr>
-            <td>{{ members.id }}</td>
-            <td>{{ members.first_name}}</td>
-            <td>{{ members.last_name}}</td>
-            <td>{{ members.preferred_name}}</td>
-            <td>{{ members.tnumber}}</td>
-            <td>{{ members.coop}}</td>
-            <td>{{ members.email}}</td>
-            <td>{{ members.pronouns}}</td>
-            <td>{{ members.time_aid}}</td>
-            <td>{{ members.missed_jobes}}</td>  
-
-            
-        </tr>
-        {% endfor %}
-    </table>
+      {% for members in harknessmembers %}
+      <tr>
+          <!-- <td>{{ members.preferred_name}}</td> -->
+          <!-- <td>{{ members.email}}</td> -->
+          <td><div class="columns" >{{ members.first_name}}</div></td>
+          <td><div class="columns" >{{ members.last_name}}</div></td>
+          <td><div class="columns" >{{ members.pronouns}}</div></td>
+          <td><div class="columns" >{{ members.time_aid}}</div></td>
+          <td><div class="columns" >{{ members.missed_jobes}}</div></td>
+          
+      </tr>
+      {% endfor %}
+  </table>
 {% endblock %}
 
-<!-- <html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Members</title>
-</head>
-
-<body>
-
-    <h1>List of Members</h1>
-    <table border="1" width="600">
-        <tr>
-            <td>ID</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Preferred Name</td>
-            <td>T Number</td>
-            <td>Coop</td>
-            <td>Email</td>
-            <td>Pronouns</td>
-            <td>Time Aid</td>
-            <td>Missed Jobs</td>
-        </tr>
-
-        {% for members in allmember %}
-        <tr>
-            <td>{{ members.id }}</td>
-            <td>{{ members.first_name }}</td>
-            <td>{{ members.last_name }}</td>
-            <td>{{ members.preferred_name }}</td>
-            <td>{{ members.tnumber}}</td>
-            <td>{{ members.coop}}</td>
-            <td>{{ members.email}}</td>
-            <td>{{ members.pronouns }}</td>
-            <td>{{ members.time_aid }}</td>
-            <td>{{ members.missed_jobes}}</td>
-            
-        </tr>
-        {% endfor %}
-    </table>
-
-
-</body>
-
-</html> -->

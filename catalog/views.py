@@ -19,6 +19,12 @@ from catalog.forms import addMemberInfo
 
 from .models import Coop, Member, Officer, Allergy, AllergySeverity, Budget, Meal, Menu, Shift, WorkChartRow
 
+KEEP = 1
+TANK = 2
+PYLE = 3
+HARKNESS = 4
+THIRDWORLD= 5
+
 def index1(request):
     """View function for home page of site."""
 
@@ -46,7 +52,7 @@ def index(request):
     View function to show every office in Pyle
     """
 
-    officers_pyle= Officer.objects.select_related("coop").filter(coop_id__exact=2)
+    officers_pyle= Officer.objects.select_related("coop").filter(coop_id__exact=PYLE)
     num_officers=Officer.objects.all().count()
 
     context={
@@ -84,7 +90,7 @@ def memberspyle(request):
     View function to show members of Pyle Coop
     """
 
-    pylemembers= Member.objects.select_related("coop").filter(coop_id__exact=2)
+    pylemembers= Member.objects.select_related("coop").filter(coop_id__exact=PYLE)
 
     context={
         'pylemembers': pylemembers
@@ -98,13 +104,13 @@ def membersthirdworld(request):
     View function to show members of Third World Coop
     """
 
-    thirdworldm= Member.objects.select_related("coop").filter(coop_id__exact=5)
+    thirdworldm= Member.objects.select_related("coop").filter(coop_id__exact=THIRDWORLD)
 
     context={
         'thirdworldm': thirdworldm
     }
 
-    return render(request,'memberspyle.html',context=context)
+    return render(request,'membersthirdworld.html',context=context)
 
 
 def memberstank(request): 
@@ -112,7 +118,7 @@ def memberstank(request):
     View function to show members of Tank Coop
     """
 
-    tankmembers= Member.objects.select_related("coop").filter(coop_id__exact=1)
+    tankmembers= Member.objects.select_related("coop").filter(coop_id__exact=TANK)
 
     context={
         'tankmembers': tankmembers
@@ -125,7 +131,7 @@ def membersharkness(request):
     View function to show members of Harkness Coop
     """
 
-    harknessmembers= Member.objects.select_related("coop").filter(coop_id__exact=3)
+    harknessmembers= Member.objects.select_related("coop").filter(coop_id__exact=HARKNESS)
 
     context={
         'harknessmembers': harknessmembers
@@ -137,7 +143,7 @@ def memberskeep(request):
 
     "View function to show members of Keep Coop"
 
-    keepmembers=Member.objects.select_related("coop").filter(coop_id__exact=4)
+    keepmembers=Member.objects.select_related("coop").filter(coop_id__exact=KEEP)
 
     context={
         'keepmembers': keepmembers
@@ -173,7 +179,7 @@ def pyleofficers(request):
     View function to show every officer in the Pyle Coop
     """
 
-    officers_pyle= Officer.objects.select_related("coop").filter(coop_id__exact=2)
+    officers_pyle= Officer.objects.select_related("coop").filter(coop_id__exact=PYLE)
 
     context={
         'officers_pyle': officers_pyle
@@ -187,7 +193,7 @@ def harknessofficers(request):
     View function to show every officer in the Pyle Coop
     """
 
-    officers_harkness= Officer.objects.select_related("coop").filter(coop_id__exact=3)
+    officers_harkness= Officer.objects.select_related("coop").filter(coop_id__exact=HARKNESS)
 
     context={
         'officers_harkness': officers_harkness
@@ -202,7 +208,7 @@ def tankofficers(request):
     View function to show every officer in the Tank Coop
     """
 
-    officers_tank= Officer.objects.select_related("coop").filter(coop_id__exact=1)
+    officers_tank= Officer.objects.select_related("coop").filter(coop_id__exact=TANK)
 
     context={
         'officers_tank': officers_tank
@@ -217,7 +223,7 @@ def keepofficers(request):
     View function to show every officer in the Keep Coop
     """
 
-    officers_keep= Officer.objects.select_related("coop").filter(coop_id__exact=4)
+    officers_keep= Officer.objects.select_related("coop").filter(coop_id__exact=KEEP)
 
     context={
         'officers_keep': officers_keep
@@ -232,14 +238,14 @@ def thirdworldofficers(request):
     View function to show every officer in the Keep Coop
     """
 
-    officers_thirdworld= Officer.objects.select_related("coop").filter(coop_id__exact=5)
+    officers_thirdworld= Officer.objects.select_related("coop").filter(coop_id__exact=THIRDWORLD)
 
     context={
         'officers_thirdworld': officers_thirdworld
         
     }
 
-    return render(request,'tankofficers.html',context=context)
+    return render(request,'thirdworldofficers.html',context=context)
 
 class AllCoopView(generic.ListView):
     model = Coop
@@ -285,7 +291,7 @@ def allergiestank(request):
     View function to show every allergy in the Tank Coop
     """
 
-    allergytank= Allergy.objects.select_related("coop").filter(coop_id__exact=1)
+    allergytank= Allergy.objects.select_related("coop").filter(coop_id__exact=TANK)
 
     context={
         'allergytank': allergytank
@@ -300,7 +306,7 @@ def allergiespyle(request):
     View function to show every allergy in the Pyle Coop
     """
 
-    allergypyle= Allergy.objects.select_related("coop").filter(coop_id__exact=2)
+    allergypyle= Allergy.objects.select_related("coop").filter(coop_id__exact=PYLE)
 
     context={
         'allergypyle': allergypyle
@@ -316,7 +322,7 @@ def allergiesharkness(request):
     View function to show every allergy in the Tank Coop
     """
 
-    allergyharkness= Allergy.objects.select_related("coop").filter(coop_id__exact=3)
+    allergyharkness= Allergy.objects.select_related("coop").filter(coop_id__exact=HARKNESS)
 
     context={
         'allergyharkness': allergyharkness
@@ -331,7 +337,7 @@ def allergieskeep(request):
     View function to show every allergy in the Keep Coop
     """
 
-    allergykeep= Allergy.objects.select_related("coop").filter(coop_id__exact=4)
+    allergykeep= Allergy.objects.select_related("coop").filter(coop_id__exact=KEEP)
 
     context={
         'allergykeep': allergykeep
@@ -346,7 +352,7 @@ def allergiesthirdworld(request):
     View function to show every allergy in the Third World Coop
     """
 
-    allergythirdworld= Allergy.objects.select_related("coop").filter(coop_id__exact=5)
+    allergythirdworld= Allergy.objects.select_related("coop").filter(coop_id__exact=THIRDWORLD)
 
     context={
         'allergythirdworld': allergythirdworld
