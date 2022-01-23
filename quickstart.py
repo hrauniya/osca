@@ -1,4 +1,5 @@
 from __future__ import print_function
+from gettext import Catalog
 
 import os.path
 
@@ -15,6 +16,12 @@ from django.contrib.auth.models import User
 
 from osca.wsgi import *
 from catalog.models import Coop, Member, Officer, AllergySeverity, Allergy, Budget
+from django.db import models
+
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'osca.settings')
 django.setup()
@@ -76,17 +83,21 @@ def main():
 
 
 
-        keep = Coop.objects.get(name = "Keep")
-        keep = Coop.objects.get(name = "Keep")
 
 
 
         for row in values:
+
+            firstname = row[1]
+            lastname = row[2]
+
+            myusername = firstname+lastname
+            checkuser = User.objects.filter(username=myusername).exists()
+           
+            if checkuser is False:
                 newemail = row[0]
-                firstname = row[1]
-                lastname = row[2]
+
                 tNumber = row[3]
-                if tNumber.
                 coop = row[4]
                 coop = Coop.objects.get(name = coop)
 
@@ -100,26 +111,34 @@ def main():
                 officer = False
                 if row[8] == "Yes":
                     officer = True
-                positions = row[9]
-                positionHours = int(row[10])
-                hours = hours - positionHours
+
+                positions = None
+                positionHours = None
                 emergency = False
-                if row[10]:
-                    emergency = True
-                myusername = firstname+lastname
-                
-                checkuser = User.objects.filter(username=myusername).exists()
-                if checkuser is False:
-                    user = User.objects.create_user(username = myusername, first_name = firstname, last_name = lastname, email = newemail, password = tNumber)
-                    user.save()
-                    if tNumber[0] == 't':
-                        tNumber = tNumber[1:end]
-                    newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
-                    newMember.save()
 
+                if officer:
+                    positions = row[9]
+                    if row[10]:
+                        positionHours = int(row[10])
+                    else:
+                         positionHours = 0
+                    hours = hours - positionHours
+                    emergency = False
+                    if row[10]:
+                        emergency = True
 
-                if()
-                
+                user = User.objects.create_user(username = myusername, first_name = firstname, last_name = lastname, email = newemail, password = tNumber)
+                                          
+                if tNumber[0] == 't' or 'T':
+                    tNumber = tNumber[1:]
+                newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
+                newMember.save()
+                if officer:
+                    newOfficer = Officer(coop = coop, member = newMember, position_name = positions, hours_required = hours, emergency_contact = emergency)
+                    officerperm = Permission.objects.get(codename='add_officer')
+                    user.user_permissions.add(officerperm)
+
+                user.save()
                 print(f"{firstname}, {lastname}, {pronouns}, {positions}")
                 '''
                 newMember.save()

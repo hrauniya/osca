@@ -44,6 +44,9 @@ class Officer(models.Model):
 
     all_osca = models.BooleanField(default=False)
 
+    class Meta:
+        permissions = (("is_officer", "Gives user the officer permissions"),)
+
     def __str__(self):
         """String for representing the Model object."""
         return self.position_name

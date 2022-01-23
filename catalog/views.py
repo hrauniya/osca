@@ -2,11 +2,14 @@ from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 import datetime
+import subprocess
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
 
 
 
@@ -60,10 +63,14 @@ def index(request):
 
     }
 
+    #Refreshes database!
+    subprocess.check_call(['python', 'quickstart.py'])
+
     return render(request,'index.html',context=context)
 
 
-class AllMembersView(LoginRequiredMixin, generic.ListView):
+class AllMembersView(PermissionRequiredMixin, generic.ListView):
+    permission_required = 'catalog.add_officer'
     model = Member
     paginate_by = 30
     num_members= Member.objects.all().count()
