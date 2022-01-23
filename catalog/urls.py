@@ -1,5 +1,9 @@
 from django.urls import path
+from django.contrib import admin
+
 from . import views
+from django.conf.urls import include
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -40,4 +44,9 @@ urlpatterns = [
     path('keepmenu/keepworkchart',views.WorkChartKeep.as_view(),name=';keep-workchart;'),
     path('tankmenu/tankworkchart',views.WorkChartTank.as_view(),name=';tank-workchart;'),
 
+]
+
+#Important account auth urls
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
