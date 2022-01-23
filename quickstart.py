@@ -2,6 +2,8 @@ from __future__ import print_function
 
 import os.path
 
+import google
+
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "osca.settings")
 
@@ -103,13 +105,12 @@ def main():
                     emergency = True
                 myusername = firstname+lastname
                 
-                checkuser = User.objects.get(username = myusername)
-                if checkuser is None:
+                checkuser = User.objects.filter(username=myusername).exists()
+                if checkuser is False:
                     user = User.objects.create_user(username = myusername, first_name = firstname, last_name = lastname, email = newemail, password = tNumber)
                     newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
                     user.save()
                     newMember.save()
-
                 print(f"{firstname}, {lastname}, {pronouns}, {positions}")
                 '''
                 newMember.save()
