@@ -86,6 +86,7 @@ def main():
                 firstname = row[1]
                 lastname = row[2]
                 tNumber = row[3]
+                if tNumber.
                 coop = row[4]
                 coop = Coop.objects.get(name = coop)
 
@@ -110,9 +111,15 @@ def main():
                 checkuser = User.objects.filter(username=myusername).exists()
                 if checkuser is False:
                     user = User.objects.create_user(username = myusername, first_name = firstname, last_name = lastname, email = newemail, password = tNumber)
-                    newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
                     user.save()
+                    if tNumber[0] == 't':
+                        tNumber = tNumber[1:end]
+                    newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
                     newMember.save()
+
+
+                if()
+                
                 print(f"{firstname}, {lastname}, {pronouns}, {positions}")
                 '''
                 newMember.save()
