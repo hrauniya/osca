@@ -28,7 +28,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'catalog/Templates/static'),
-    os.path.join(BASE_DIR, 'catalog/templates/static'),
 )
 
 
