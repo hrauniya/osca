@@ -28,6 +28,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'catalog/Templates/static'),
+    os.path.join(BASE_DIR, 'catalog/templates/static'),
+
 )
 
 
@@ -80,7 +82,7 @@ ROOT_URLCONF = 'osca.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
