@@ -55,13 +55,14 @@ ALLOWED_HOSTS = ['agile-temple-00335.herokuapp.com','desolate-river-20580.heroku
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
+    'django.contrib.admin',
+
 ]
 
 MIDDLEWARE = [
