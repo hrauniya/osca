@@ -87,6 +87,8 @@ def main():
                 lastname = row[2]
                 tNumber = row[3]
                 coop = row[4]
+                coop = Coop.objects.get(name = coop)
+
                 hours = 5
                 pronouns = row[5]
                 timeAid = 0
