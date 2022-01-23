@@ -17,3 +17,5 @@ To get this project up and running locally on your computer:
 You can also access it through https://desolate-river-20580.herokuapp.com/accounts/login/?next=/catalog/
 
 and this is the form used to add data to the database https://docs.google.com/forms/d/e/1FAIpQLSd5KIQD-r1UpgBZfgyis5HtAUwXtqgATfj1QEBpP_mHSchL3Q/viewform
+
+Our database models are stored in catals/models.py
