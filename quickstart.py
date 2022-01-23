@@ -23,6 +23,8 @@ from django.contrib.contenttypes.models import ContentType
 
 
 
+
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'osca.settings')
 django.setup()
 

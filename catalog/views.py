@@ -63,14 +63,11 @@ def index(request):
 
     }
 
-    #Refreshes database!
-    subprocess.check_call(['python', 'quickstart.py'])
 
     return render(request,'index.html',context=context)
 
 
-class AllMembersView(PermissionRequiredMixin, generic.ListView):
-    permission_required = 'catalog.add_officer'
+class AllMembersView(generic.ListView):
     model = Member
     paginate_by = 30
     num_members= Member.objects.all().count()
@@ -449,7 +446,8 @@ from django.urls import reverse_lazy
 
 from catalog.models import Member
 
-class MemberCreate(CreateView,SuccessMessageMixin):
+class MemberCreate(PermissionRequiredMixin, CreateView, SuccessMessageMixin):
+    permission_required = 'catalog.add_officer'
     model = Member
     fields = ['id','first_name','last_name','preferred_name','tnumber','coop','email','pronouns','time_aid','missed_jobes']
     success_url = reverse_lazy('all-members')
@@ -463,7 +461,8 @@ class MemberDelete(DeleteView):
     model = Member
     success_url = reverse_lazy('authors')
 
-class OfficersCreate(CreateView):
+class OfficersCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalog.add_officer'
     model=Officer
     fields = ['id','coop','member','position_name','position_description','hours_required','emergency_contact','all_osca']
     success_url=reverse_lazy('all-officers')
