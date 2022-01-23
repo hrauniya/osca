@@ -19,26 +19,27 @@
         <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
           {% if user.is_authenticated %}
-          <li>User: {{ user.get_username }}</li>
-          <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+            <li>User: {{ user.get_username }}</li>
+            <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
           {% else %}
-          <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+            <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
           {% endif %}
-          
+          {% if perms.catalog.add_officer %}
+            <li><a href="{% url 'all-officers' %}">All Officers</a></li>
+            <li><a href="{% url 'all-members' %}">All Members</a></li>
+          {% endif %}
           <li><a href="{% url 'all-coops' %}">All Coop</a></li>
-          <li><a href="{% url 'all-officers' %}">All Officers</a></li>
-          <li><a href="{% url 'all-members' %}">All Members</a></li>
           <li><a href="{% url 'pyle-menu'%}">Pyle</a></li>
           <li><a href="{% url 'twc-menu'%}">Third World House</a></li>
           <li><a href="{% url 'harkness-menu'%}">Harkness</a></li>
           <li><a href="{% url 'keep-menu'%}">Keep</a></li>
           <li><a href="{% url 'tank-menu'%}">Tank</a></li>
 
-   
-        
+          {% if perms.catalog.add_officer %}
+            <li><a href="{% url 'member-create' %}">Add Members</a></a></li>
+            <li><a href="{% url 'officer-create' %}">Add Officers</a></a></li>
+          {% endif %}
           
-          <li><a href="{% url 'member-create' %}">Add Members</a></a></li>
-          <li><a href="{% url 'officer-create' %}">Add Officers</a></a></li>
 
         </ul>
      {% endblock %}
