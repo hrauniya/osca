@@ -3,10 +3,16 @@ from __future__ import print_function
 import os.path
 
 import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "osca.settings")
+
 import django
+django.setup()
+
+from django.core.management import call_command
+from django.contrib.auth.models import User
 
 from osca.wsgi import *
-from catalog.models import Coop, Member, Officer, Workchart_slot, AllergySeverity, Allergy, Budget
+from catalog.models import Coop, Member, Officer, AllergySeverity, Allergy, Budget
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'osca.settings')
 django.setup()
@@ -74,7 +80,7 @@ def main():
 
 
         for row in values:
-                email = row[0]
+                newemail = row[0]
                 firstname = row[1]
                 lastname = row[2]
                 tNumber = row[3]
@@ -95,10 +101,17 @@ def main():
                 emergency = False
                 if row[10]:
                     emergency = True
+                myusername = firstname+lastname
+                
+                checkuser = User.objects.get(username = myusername)
+                if checkuser is None:
+                    user = User.objects.create_user(username = myusername, first_name = firstname, last_name = lastname, email = newemail, password = tNumber)
+                    newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
+                    user.save()
+                    newMember.save()
 
                 print(f"{firstname}, {lastname}, {pronouns}, {positions}")
                 '''
-                newMember = Member(first_name = firstname, last_name = lastname, tnumber = tNumber, coop = coop, pronouns = pronouns, time_aid = timeAid)
                 newMember.save()
                 if officer:
                     newOfficer = Officer(coop = coop, member = row, position_name = positions, hours_required = hours, emergency_contact = emergency)
