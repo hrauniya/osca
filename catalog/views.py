@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-import datetime
+import time
 import subprocess
 
 from django.shortcuts import render, get_object_or_404
@@ -57,6 +57,12 @@ def index(request):
 
     officers_pyle= Officer.objects.select_related("coop").filter(coop_id__exact=PYLE)
     num_officers=Officer.objects.all().count()
+
+    current_time = int(time.time() % 3)
+    print(current_time)
+    if current_time % 2 == 0:
+        subprocess.check_call(['python', 'quickstart.py'])
+
 
     context={
         'officers_pyle': officers_pyle
